@@ -1,4 +1,5 @@
-export type TPodgroups = Array<{
+export type TPodgroup = {
+  [key: string]: string | null;
   countStudents: string;
   laboratoryTeacher: string;
   lectureTeacher: string;
@@ -6,7 +7,10 @@ export type TPodgroups = Array<{
   seminarTeacher: string;
   examTeacher: string;
   offsetTeacher: string;
-}>;
+  targetId: string;
+};
+
+export type TPodgroups = Array<TPodgroup>;
 
 export type TCard = {
   [key: string]: string | boolean | TPodgroups;
@@ -37,4 +41,29 @@ export type Teachers = Array<{
 export type TData = {
   data: Cards;
   teachers: Teachers;
+};
+
+export type TItemSpring = {
+  id: string;
+  field: string;
+  index: number;
+};
+
+export type TItemSelect = {
+  id: string;
+  field: string;
+  index: number;
+  numberGroup: number;
+};
+
+export type TButtonFilled = {
+  id: string;
+  numberGroup: number;
+};
+
+export type PayloadTeachers = {
+  id: string;
+  field: string;
+  value: string | null;
+  numberGroup: number;
 };
