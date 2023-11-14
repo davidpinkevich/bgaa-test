@@ -3,11 +3,11 @@ import { v4 } from "uuid";
 import { BODY_KEYS } from "../../../constants";
 import { useAppSelector } from "../../../hooks";
 import ItemString from "../ItemString/ItemString";
+import ButtonDelete from "../../buttons/ButtonDelete/ButtonDelete";
 import ButtonGroup from "../../buttons/ButtonGroup/ButtonGroup";
 import "./ItemTable.scss";
 
 const ItemBody: FC<{ id: string }> = ({ id }) => {
-  console.log("id: ", id);
   const ref = useRef(0);
   const group = useAppSelector((state) => state.cardsReducer.cards).find(
     (x) => x.uniqueId === id
@@ -27,7 +27,9 @@ const ItemBody: FC<{ id: string }> = ({ id }) => {
         ) : (
           <>
             <div className="table__header-teachers-groups">Подгруппа 1</div>
-            <div className="table__header-teachers-groups">Подгруппа 2</div>
+            <div className="table__header-teachers-groups">
+              Подгруппа 2<ButtonDelete id={id} />
+            </div>
           </>
         )}
       </h2>

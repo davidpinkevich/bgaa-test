@@ -44,9 +44,9 @@ const cardsSlice = createSlice({
       );
       if (index !== -1) {
         const secondGroup = getNumber(state.cards[index].studentsNumber);
-        const firstGroup =
-          +state.cards[index].podgroups[0].countStudents - +secondGroup;
+        const firstGroup = +state.cards[index].studentsNumber - +secondGroup;
         state.cards[index].podgroups[0].countStudents = String(firstGroup);
+        state.cards[index].countPodgroups = "2";
         state.cards[index].podgroups.push({
           countStudents: secondGroup,
           laboratoryTeacher: "",
@@ -56,6 +56,15 @@ const cardsSlice = createSlice({
           examTeacher: "",
           offsetTeacher: "",
         });
+      }
+    },
+    deleteGroup(state, action: PayloadAction<string>) {
+      const index = state.cards.findIndex(
+        (item) => item.uniqueId === action.payload
+      );
+      if (index !== -1) {
+        state.cards[index].countPodgroups = "1";
+        state.cards[index].podgroups.pop();
       }
     },
     filledTeachers(
@@ -69,7 +78,7 @@ const cardsSlice = createSlice({
 
       if (index !== -1) {
         BODY_KEYS.forEach((item) => {
-          if (card && card[item] !== "0" && card[item]) {
+          if (card && card[item] !== "0" && card[item] && getId(item) !== "") {
             state.cards[index].podgroups[action.payload.numberGroup][
               getId(item)
             ] = action.payload.value as string;
@@ -92,5 +101,5 @@ const cardsSlice = createSlice({
 });
 
 export default cardsSlice.reducer;
-export const { changeTeacher, filledTeachers, addNewGroup } =
+export const { changeTeacher, filledTeachers, addNewGroup, deleteGroup } =
   cardsSlice.actions;
