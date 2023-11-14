@@ -3,9 +3,11 @@ import { v4 } from "uuid";
 import { BODY_KEYS } from "../../../constants";
 import { useAppSelector } from "../../../hooks";
 import ItemString from "../ItemString/ItemString";
+import ButtonGroup from "../../buttons/ButtonGroup/ButtonGroup";
 import "./ItemTable.scss";
 
 const ItemBody: FC<{ id: string }> = ({ id }) => {
+  console.log("id: ", id);
   const ref = useRef(0);
   const group = useAppSelector((state) => state.cardsReducer.cards).find(
     (x) => x.uniqueId === id
@@ -18,7 +20,10 @@ const ItemBody: FC<{ id: string }> = ({ id }) => {
         <p className="table__header-task">Занятие</p>
         <p className="table__header-hours">Часы</p>
         {totalGroups === 1 ? (
-          <div className="table__header-teachers">Преподаватель</div>
+          <div className="table__header-teachers">
+            <div className="table__header-teachers-name">Преподаватель</div>
+            <ButtonGroup id={id} />
+          </div>
         ) : (
           <>
             <div className="table__header-teachers-groups">Подгруппа 1</div>
