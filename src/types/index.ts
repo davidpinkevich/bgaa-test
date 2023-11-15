@@ -7,7 +7,6 @@ export type TPodgroup = {
   seminarTeacher: string;
   examTeacher: string;
   offsetTeacher: string;
-  targetId: string;
 };
 
 export type TPodgroups = Array<TPodgroup>;

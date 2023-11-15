@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { getId, getNumber } from "../../utils";
 import { BODY_KEYS } from "../../constants";
-import { Cards, Teachers, PayloadTeachers } from "../../types";
+import { TCard, Cards, Teachers, PayloadTeachers } from "../../types";
 
 type TInitialState = {
   cards: Cards;
   teachers: Teachers;
   loading: boolean;
+  info: Array<{ id: string; value: string }>;
 };
 
 const initialState: TInitialState = {
   cards: [],
   teachers: [],
   loading: false,
+  info: [],
 };
 
 export const getCards = createAsyncThunk(
@@ -86,6 +88,14 @@ const cardsSlice = createSlice({
         });
       }
     },
+    changeArea(state, action: PayloadAction<{ id: string; value: string }>) {
+      const index = state.info.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.info[index].value = action.payload.value;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -95,11 +105,22 @@ const cardsSlice = createSlice({
       .addCase(getCards.fulfilled, (state, action) => {
         state.cards = action.payload.data;
         state.teachers = action.payload.teachers;
+        action.payload.data.forEach((item: TCard) => {
+          state.info.push({
+            id: item.uniqueId,
+            value: item.additionalInfo,
+          });
+        });
         state.loading = false;
       });
   },
 });
 
 export default cardsSlice.reducer;
-export const { changeTeacher, filledTeachers, addNewGroup, deleteGroup } =
-  cardsSlice.actions;
+export const {
+  changeTeacher,
+  filledTeachers,
+  addNewGroup,
+  deleteGroup,
+  changeArea,
+} = cardsSlice.actions;

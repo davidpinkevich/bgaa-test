@@ -21,7 +21,7 @@ export const getTitle = (value: string) => {
       return "Зачёт";
     case "exam":
       return "Экзамен";
-    case "countStudents":
+    case "countPodgroups":
       return "Количество человек";
     case "additionalInfo":
       return "Примечание (для составления расписания)";

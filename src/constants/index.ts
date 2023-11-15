@@ -12,7 +12,8 @@ export const BODY_KEYS: Array<string> = [
   "seminarHours",
   "offset",
   "exam",
-  "countStudents",
+  "countPodgroups",
+  "additionalInfo",
 ];
 
 export const PODGROUPS_KEYS: Array<string> = [
