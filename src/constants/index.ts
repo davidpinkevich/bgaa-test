@@ -1,4 +1,5 @@
 export const BASE_URL = "https://bgaa.by/test";
+export const POST_URL = "https://bgaa.by/test_result";
 
 export const HEADER_KEYS: Array<string> = [
   "groupName",
