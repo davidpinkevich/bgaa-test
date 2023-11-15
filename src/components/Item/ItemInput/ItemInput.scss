@@ -1,0 +1,19 @@
+.table__body-item-input {
+  width: 50%;
+  height: 60px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(235, 238, 240);
+  & input {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+  }
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
