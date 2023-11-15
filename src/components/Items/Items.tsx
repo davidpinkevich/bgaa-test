@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../hooks";
+import ButtonSave from "../buttons/ButtonSave/ButtonSave";
 import Item from "../Item/Item";
 import "./Items.scss";
 
@@ -10,6 +11,7 @@ const Items = () => {
       {items.map((elem) => {
         return <Item key={elem.uniqueId} {...elem} />;
       })}
+      <ButtonSave />
     </div>
   );
 };
