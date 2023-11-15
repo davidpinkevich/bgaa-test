@@ -12,7 +12,6 @@ const ItemString: FC<TItemSpring> = ({ id, field, index }) => {
   const group = useAppSelector((state) => state.cardsReducer.cards).find(
     (item) => item.uniqueId === id
   );
-
   const name: string | boolean | TPodgroups =
     group !== undefined ? group[field] : "";
 
@@ -50,7 +49,7 @@ const ItemString: FC<TItemSpring> = ({ id, field, index }) => {
       {group?.podgroups.map((elem, i) => (
         <Fragment key={v4()}>
           {field === "countPodgroups" && (
-            <ItemInput value={elem.countStudents} />
+            <ItemInput value={elem.countStudents} id={id} numberGroup={i} />
           )}
           {field !== "additionalInfo" && field !== "countPodgroups" && (
             <ItemSelect field={field} id={id} index={index} numberGroup={i} />

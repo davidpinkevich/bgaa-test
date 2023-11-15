@@ -66,6 +66,8 @@ const cardsSlice = createSlice({
       );
       if (index !== -1) {
         state.cards[index].countPodgroups = "1";
+        state.cards[index].podgroups[0].countStudents =
+          state.cards[index].studentsNumber;
         state.cards[index].podgroups.pop();
       }
     },
@@ -96,6 +98,43 @@ const cardsSlice = createSlice({
         state.info[index].value = action.payload.value;
       }
     },
+    changeInput(
+      state,
+      action: PayloadAction<{ numberGroup: number; value: string; id: string }>
+    ) {
+      const index = state.cards.findIndex(
+        (item) => item.uniqueId === action.payload.id
+      );
+      const total = +state.cards[index].studentsNumber;
+      const newValue = +action.payload.value;
+      if (index !== -1) {
+        if (action.payload.numberGroup === 0) {
+          if (newValue < total - 1) {
+            state.cards[index].podgroups[0].countStudents = "";
+            state.cards[index].podgroups[0].countStudents = String(newValue);
+            state.cards[index].podgroups[1].countStudents = String(
+              total - newValue
+            );
+          } else if (newValue >= total) {
+            state.cards[index].podgroups[0].countStudents = "";
+            state.cards[index].podgroups[0].countStudents = String(total - 1);
+            state.cards[index].podgroups[1].countStudents = String(1);
+          }
+        } else if (action.payload.numberGroup === 1) {
+          if (newValue < total - 1) {
+            state.cards[index].podgroups[1].countStudents = "";
+            state.cards[index].podgroups[1].countStudents = String(newValue);
+            state.cards[index].podgroups[0].countStudents = String(
+              total - newValue
+            );
+          } else if (newValue >= total) {
+            state.cards[index].podgroups[1].countStudents = "";
+            state.cards[index].podgroups[1].countStudents = String(total - 1);
+            state.cards[index].podgroups[0].countStudents = String(1);
+          }
+        }
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -123,4 +162,5 @@ export const {
   addNewGroup,
   deleteGroup,
   changeArea,
+  changeInput,
 } = cardsSlice.actions;
