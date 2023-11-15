@@ -1,0 +1,38 @@
+.table {
+  &__body-item {
+    display: flex;
+    min-height: 60px;
+
+    &-name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 35%;
+      min-height: 100%;
+      flex-shrink: 0;
+      border: 1px solid rgb(235, 238, 240);
+    }
+    &-value {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15%;
+      flex-shrink: 0;
+      border: 1px solid rgb(235, 238, 240);
+    }
+    &-select {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgb(235, 238, 240);
+    }
+  }
+}
+
+.white-blue {
+  background-color: rgb(249, 254, 255);
+}
+.dark-blue {
+  background-color: rgb(245, 253, 255);
+}
