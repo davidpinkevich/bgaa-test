@@ -43,6 +43,7 @@ const ItemString: FC<TItemSpring> = ({ id, field, index }) => {
       >
         {typeof name === "string" &&
           field !== "countPodgroups" &&
+          field !== "additionalInfo" &&
           !isNaN(+name) &&
           name}
       </div>

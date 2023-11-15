@@ -26,6 +26,19 @@ export const getCards = createAsyncThunk(
   }
 );
 
+export const saveResult = createAsyncThunk(
+  "cardsReducer/saveCards",
+  async (cards: { url: string; body: Cards }) => {
+    await fetch(cards.url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cards.body),
+    });
+  }
+);
+
 const cardsSlice = createSlice({
   name: "cards",
   initialState,
@@ -91,11 +104,11 @@ const cardsSlice = createSlice({
       }
     },
     changeArea(state, action: PayloadAction<{ id: string; value: string }>) {
-      const index = state.info.findIndex(
-        (item) => item.id === action.payload.id
+      const index = state.cards.findIndex(
+        (item) => item.uniqueId === action.payload.id
       );
       if (index !== -1) {
-        state.info[index].value = action.payload.value;
+        state.cards[index].additionalInfo = action.payload.value;
       }
     },
     changeInput(

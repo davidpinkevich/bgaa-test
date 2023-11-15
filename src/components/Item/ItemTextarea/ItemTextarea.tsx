@@ -5,8 +5,8 @@ import "./ItemTextarea.scss";
 
 const ItemTextarea: FC<{ index: number; id: string }> = ({ index, id }) => {
   const dispatch = useAppDispatch();
-  const group = useAppSelector((state) => state.cardsReducer.info).find(
-    (item) => item.id === id
+  const group = useAppSelector((state) => state.cardsReducer.cards).find(
+    (item) => item.uniqueId === id
   );
 
   const handlerArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +21,10 @@ const ItemTextarea: FC<{ index: number; id: string }> = ({ index, id }) => {
           : "table__body-item-textarea white-blue"
       }
     >
-      <textarea value={group?.value} onChange={handlerArea}></textarea>
+      <textarea
+        defaultValue={group?.additionalInfo}
+        onBlur={handlerArea}
+      ></textarea>
     </div>
   );
 };
