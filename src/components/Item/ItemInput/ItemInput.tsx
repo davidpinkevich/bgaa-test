@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from "react";
 import { changeInput } from "../../../redux/slices";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch } from "../../../hooks";
 import "./ItemInput.scss";
 
 const ItemInput: FC<{ id: string; value: string; numberGroup: number }> = ({
@@ -8,10 +8,6 @@ const ItemInput: FC<{ id: string; value: string; numberGroup: number }> = ({
   value,
   numberGroup,
 }) => {
-  const peks = useAppSelector((state) => state.cardsReducer.cards).find(
-    (e) => e.uniqueId === id
-  )?.podgroups;
-  console.log("card", peks);
   const dispatch = useAppDispatch();
   const handlerInput = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(
