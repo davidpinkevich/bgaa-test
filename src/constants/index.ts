@@ -1,3 +1,5 @@
+export const BASE_URL = "https://bgaa.by/test";
+
 export const HEADER_KEYS: Array<string> = [
   "groupName",
   "course",
