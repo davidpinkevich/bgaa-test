@@ -9,6 +9,9 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
+    @media (max-width: 600px) {
+      font-size: 16px;
+    }
   }
   &-body {
     display: flex;

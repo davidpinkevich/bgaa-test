@@ -21,7 +21,7 @@ type TStyles = {
 
 export const styles: TStyles = {
   input: {
-    fontSize: 16,
+    fontSize: 14,
     width: "100%",
     height: "40px",
     textAlign: "center",
@@ -29,7 +29,7 @@ export const styles: TStyles = {
     color: "rgb(77, 88, 103)",
   },
   option: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "center",
     height: "50px",
     color: "rgb(106, 119, 136)",

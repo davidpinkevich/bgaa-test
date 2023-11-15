@@ -5,6 +5,11 @@
   background: inherit;
   transition: all 0.2s;
   margin-left: 5px;
+  @media (max-width: 600px) {
+    margin-left: 1px;
+    width: 15px;
+    height: 15px;
+  }
   &:hover {
     transform: scale(1.15);
   }

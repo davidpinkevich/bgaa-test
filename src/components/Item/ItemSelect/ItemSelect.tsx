@@ -30,6 +30,7 @@ const ItemSelect: FC<TItemSelect> = ({ field, id, index, numberGroup }) => {
           ? "table__body-item-select dark-blue"
           : "table__body-item-select white-blue"
       }
+      style={{ width: item?.podgroups.length === 2 ? "25%" : "50%" }}
     >
       {getId(field) && (
         <Select

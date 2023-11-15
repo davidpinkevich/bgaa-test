@@ -26,8 +26,16 @@ const ItemBody: FC<{ id: string }> = ({ id }) => {
           </div>
         ) : (
           <>
-            <div className="table__header-teachers-groups">Подгруппа 1</div>
-            <div className="table__header-teachers-groups">
+            <div
+              className="table__header-teachers-groups"
+              style={{ width: totalGroups === 2 ? "25%" : "50%" }}
+            >
+              Подгруппа 1
+            </div>
+            <div
+              className="table__header-teachers-groups"
+              style={{ width: totalGroups === 2 ? "25%" : "50%" }}
+            >
               Подгруппа 2<ButtonDelete id={id} />
             </div>
           </>

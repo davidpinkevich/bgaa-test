@@ -7,6 +7,9 @@
     font-weight: 700;
     font-size: 18px;
     height: 50px;
+    @media (max-width: 600px) {
+      font-size: 14px;
+    }
 
     &-task {
       display: flex;
@@ -16,6 +19,10 @@
       height: 100%;
       font-size: 16px;
       border: 1px solid rgb(235, 238, 240);
+      @media (max-width: 600px) {
+        font-size: 14px;
+        width: 20%;
+      }
     }
     &-hours {
       display: flex;
@@ -25,6 +32,10 @@
       height: 100%;
       font-size: 16px;
       border: 1px solid rgb(235, 238, 240);
+      @media (max-width: 600px) {
+        font-size: 14px;
+        width: 12%;
+      }
     }
     &-teachers {
       display: flex;
@@ -35,6 +46,10 @@
       height: 100%;
       font-size: 16px;
       border: 1px solid rgb(235, 238, 240);
+      @media (max-width: 600px) {
+        font-size: 14px;
+        flex-grow: 1;
+      }
       &-groups {
         display: flex;
         align-items: center;
@@ -43,6 +58,10 @@
         height: 100%;
         font-size: 16px;
         border: 1px solid rgb(235, 238, 240);
+        @media (max-width: 600px) {
+          font-size: 12px;
+          flex-grow: 1;
+        }
       }
     }
   }
