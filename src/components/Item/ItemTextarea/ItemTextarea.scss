@@ -1,0 +1,16 @@
+.table__body-item-textarea {
+  max-width: 100%;
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid rgb(235, 238, 240);
+  & textarea {
+    resize: vertical;
+    padding: 5px;
+    width: 100%;
+    min-height: 100%;
+    &:focus {
+      border: 2px solid black;
+      border-radius: 2px;
+    }
+  }
+}
