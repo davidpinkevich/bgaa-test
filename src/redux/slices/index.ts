@@ -1,20 +1,18 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { getId, getNumber } from "../../utils";
-import { BODY_KEYS } from "../../constants";
-import { TCard, Cards, Teachers, PayloadTeachers } from "../../types";
+import { BODY_KEYS, POST_URL } from "../../constants";
+import { Cards, Teachers, PayloadTeachers, TData } from "../../types";
 
 type TInitialState = {
   cards: Cards;
   teachers: Teachers;
   loading: boolean;
-  info: Array<{ id: string; value: string }>;
 };
 
 const initialState: TInitialState = {
   cards: [],
   teachers: [],
   loading: false,
-  info: [],
 };
 
 export const getCards = createAsyncThunk(
@@ -28,13 +26,13 @@ export const getCards = createAsyncThunk(
 
 export const saveResult = createAsyncThunk(
   "cardsReducer/saveCards",
-  async (cards: { url: string; body: Cards }) => {
-    await fetch(cards.url, {
+  async (data: TData) => {
+    await fetch(POST_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(cards.body),
+      body: JSON.stringify(data),
     });
   }
 );
@@ -48,9 +46,15 @@ const cardsSlice = createSlice({
         (item) => item.uniqueId === action.payload.id
       );
       if (index !== -1) {
-        state.cards[index].podgroups[action.payload.numberGroup][
-          getId(action.payload.field)
-        ] = action.payload.value as string;
+        if (action.payload.value !== "0") {
+          state.cards[index].podgroups[action.payload.numberGroup][
+            getId(action.payload.field)
+          ] = action.payload.value as string;
+        } else if (action.payload.value === "0") {
+          state.cards[index].podgroups[action.payload.numberGroup][
+            getId(action.payload.field)
+          ] = "";
+        }
       }
     },
     addNewGroup(state, action: PayloadAction<string>) {
@@ -157,12 +161,6 @@ const cardsSlice = createSlice({
       .addCase(getCards.fulfilled, (state, action) => {
         state.cards = action.payload.data;
         state.teachers = action.payload.teachers;
-        action.payload.data.forEach((item: TCard) => {
-          state.info.push({
-            id: item.uniqueId,
-            value: item.additionalInfo,
-          });
-        });
         state.loading = false;
       });
   },
