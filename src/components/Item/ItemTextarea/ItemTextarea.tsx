@@ -1,17 +1,18 @@
-import { ChangeEvent, FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { ChangeEvent, FC, useCallback } from "react";
+import { useAppDispatch } from "../../../hooks";
 import { changeArea } from "../../../redux/slices";
+import { TCard } from "../../../types";
 import "./ItemTextarea.scss";
 
-const ItemTextarea: FC<{ index: number; id: string }> = ({ index, id }) => {
+const ItemTextarea: FC<{ index: number; group: TCard }> = ({
+  index,
+  group,
+}) => {
   const dispatch = useAppDispatch();
-  const group = useAppSelector((state) => state.cardsReducer.cards).find(
-    (item) => item.uniqueId === id
-  );
 
-  const handlerArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(changeArea({ id, value: event.target.value }));
-  };
+  const handlerArea = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(changeArea({ id: group.uniqueId, value: event.target.value }));
+  }, []);
 
   return (
     <div

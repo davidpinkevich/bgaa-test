@@ -1,21 +1,16 @@
-import { FC, Fragment } from "react";
-import { v4 } from "uuid";
-import { useAppSelector } from "../../../hooks";
+import { FC, Fragment, memo } from "react";
 import ItemSelect from "../ItemSelect/ItemSelect";
 import ItemInput from "../ItemInput/ItemInput";
 import ItemTextarea from "../ItemTextarea/ItemTextarea";
 import { getTitle } from "../../../utils";
-import { TPodgroups, TItemSpring } from "../../../types";
+import { TPodgroups, TItemSpring, Teachers } from "../../../types";
 import "./ItemString.scss";
 
-const ItemString: FC<TItemSpring> = ({ id, field, index }) => {
-  const group = useAppSelector((state) => state.cardsReducer.cards).find(
-    (item) => item.uniqueId === id
-  );
-  const name: string | boolean | TPodgroups =
-    group !== undefined ? group[field] : "";
+const ItemString: FC<TItemSpring> = memo(({ item, field, index }) => {
+  const name: string | boolean | TPodgroups | Teachers =
+    item !== undefined ? item[field] : "";
 
-  const totalGroups = group?.podgroups.length;
+  const totalGroups = item?.podgroups.length;
 
   return (
     <div
@@ -47,19 +42,30 @@ const ItemString: FC<TItemSpring> = ({ id, field, index }) => {
           !isNaN(+name) &&
           name}
       </div>
-      {group?.podgroups.map((elem, i) => (
-        <Fragment key={v4()}>
+      {item?.podgroups.map((elem, i) => (
+        <Fragment key={i}>
           {field === "countPodgroups" && (
-            <ItemInput value={elem.countStudents} id={id} numberGroup={i} />
+            <ItemInput
+              value={elem.countStudents}
+              id={item.uniqueId}
+              numberGroup={i}
+            />
           )}
           {field !== "additionalInfo" && field !== "countPodgroups" && (
-            <ItemSelect field={field} id={id} index={index} numberGroup={i} />
+            <ItemSelect
+              field={field}
+              group={item}
+              index={index}
+              numberGroup={i}
+            />
           )}
         </Fragment>
       ))}
-      {field === "additionalInfo" && <ItemTextarea index={index} id={id} />}
+      {field === "additionalInfo" && (
+        <ItemTextarea index={index} group={item} />
+      )}
     </div>
   );
-};
+});
 
 export default ItemString;

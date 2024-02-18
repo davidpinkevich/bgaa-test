@@ -4,12 +4,12 @@ import Item from "../Item/Item";
 import "./Items.scss";
 
 const Items = () => {
-  const items = useAppSelector((state) => state.cardsReducer.cards);
+  const state = useAppSelector((state) => state.cardsReducer);
 
   return (
     <div className="cards">
-      {items.map((elem) => {
-        return <Item key={elem.uniqueId} {...elem} />;
+      {state.cards.map((elem) => {
+        return <Item key={elem.uniqueId} {...elem} teachers={state.teachers} />;
       })}
       <ButtonSave />
     </div>

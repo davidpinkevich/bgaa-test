@@ -1,16 +1,17 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { TCard } from "../../types";
 import ItemHeader from "./ItemHeader/ItemHeader";
 import ItemBody from "./ItemTable/ItemTable";
 import "./Item.scss";
 
-const Item: FC<TCard> = (props) => {
+const Item: FC<TCard> = memo((props) => {
+  console.log("render item");
   return (
     <div className="cards__item card">
-      <ItemHeader id={props.uniqueId} />
-      <ItemBody id={props.uniqueId} />
+      <ItemHeader item={props} />
+      <ItemBody item={props} />
     </div>
   );
-};
+});
 
 export default Item;

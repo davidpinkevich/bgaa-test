@@ -1,18 +1,14 @@
-import { FC, useRef } from "react";
-import { v4 } from "uuid";
+import { FC, useRef, memo } from "react";
 import { BODY_KEYS } from "../../../constants";
-import { useAppSelector } from "../../../hooks";
 import ItemString from "../ItemString/ItemString";
 import ButtonDelete from "../../buttons/ButtonDelete/ButtonDelete";
 import ButtonGroup from "../../buttons/ButtonGroup/ButtonGroup";
+import { TCard } from "../../../types";
 import "./ItemTable.scss";
 
-const ItemBody: FC<{ id: string }> = ({ id }) => {
+const ItemBody: FC<{ item: TCard }> = memo((props) => {
   const ref = useRef(0);
-  const group = useAppSelector((state) => state.cardsReducer.cards).find(
-    (x) => x.uniqueId === id
-  );
-  const totalGroups = group?.podgroups.length;
+  const totalGroups = props.item?.podgroups.length;
 
   return (
     <div className="card__body table">
@@ -22,7 +18,7 @@ const ItemBody: FC<{ id: string }> = ({ id }) => {
         {totalGroups === 1 ? (
           <div className="table__header-teachers">
             <div className="table__header-teachers-name">Преподаватель</div>
-            <ButtonGroup id={id} />
+            <ButtonGroup id={props.item.uniqueId} />
           </div>
         ) : (
           <>
@@ -36,21 +32,27 @@ const ItemBody: FC<{ id: string }> = ({ id }) => {
               className="table__header-teachers-groups"
               style={{ width: totalGroups === 2 ? "25%" : "50%" }}
             >
-              Подгруппа 2<ButtonDelete id={id} />
+              Подгруппа 2<ButtonDelete id={props.item.uniqueId} />
             </div>
           </>
         )}
       </h2>
       <div className="table__body">
-        {BODY_KEYS.map((item) => {
+        {BODY_KEYS.map((elem) => {
           if (
-            (group !== undefined && typeof group[item] === "string") ||
-            (group !== undefined && group[item]) ||
-            item === "countStudents"
+            (props.item !== undefined &&
+              typeof props.item[elem] === "string") ||
+            (props.item !== undefined && props.item[elem]) ||
+            elem === "countStudents"
           ) {
             ref.current++;
             return (
-              <ItemString key={v4()} id={id} field={item} index={ref.current} />
+              <ItemString
+                key={elem}
+                item={props.item}
+                field={elem}
+                index={ref.current}
+              />
             );
           }
           return null;
@@ -58,6 +60,6 @@ const ItemBody: FC<{ id: string }> = ({ id }) => {
       </div>
     </div>
   );
-};
+});
 
 export default ItemBody;
