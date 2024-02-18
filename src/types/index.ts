@@ -12,7 +12,7 @@ export type TPodgroup = {
 export type TPodgroups = Array<TPodgroup>;
 
 export type TCard = {
-  [key: string]: string | boolean | TPodgroups;
+  [key: string]: string | boolean | TPodgroups | Teachers;
   subjectName: string;
   course: string;
   semestr: string;
@@ -28,6 +28,7 @@ export type TCard = {
   countPodgroups: string;
   uniqueId: string;
   podgroups: TPodgroups;
+  teachers: Teachers;
 };
 
 export type Cards = Array<TCard>;
@@ -43,20 +44,20 @@ export type TData = {
 };
 
 export type TItemSpring = {
-  id: string;
+  item: TCard;
   field: string;
   index: number;
 };
 
 export type TItemSelect = {
-  id: string;
+  group: TCard;
   field: string;
   index: number;
   numberGroup: number;
 };
 
 export type TButtonFilled = {
-  id: string;
+  item: TCard;
   numberGroup: number;
 };
 
