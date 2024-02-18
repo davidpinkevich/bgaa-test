@@ -5,7 +5,6 @@ import ItemBody from "./ItemTable/ItemTable";
 import "./Item.scss";
 
 const Item: FC<TCard> = memo((props) => {
-  console.log("render item");
   return (
     <div className="cards__item card">
       <ItemHeader item={props} />

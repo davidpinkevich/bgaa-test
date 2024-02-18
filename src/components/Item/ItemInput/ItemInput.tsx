@@ -5,7 +5,6 @@ import "./ItemInput.scss";
 
 const ItemInput: FC<{ id: string; value: string; numberGroup: number }> = memo(
   ({ id, value, numberGroup }) => {
-    console.log("render input");
     const dispatch = useAppDispatch();
     const handlerInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
       dispatch(
